@@ -1,9 +1,7 @@
 import React from 'react';
 import { AutoForm, AutoField, ErrorField } from 'uniforms-unstyled';
 import SimpleSchema from 'simpl-schema';
-import { withRouter } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { AuthRoute } from 'react-router-auth';
 
 class Login extends React.Component {
     constructor(props) {

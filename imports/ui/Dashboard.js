@@ -1,4 +1,5 @@
 import React from 'react';
+import { Accounts } from 'meteor/accounts-base';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -7,7 +8,10 @@ class Dashboard extends React.Component {
 
     render(){
         return(
-            <div>This is your dashboard!</div>
+            <div>
+                <div>This is your dashboard!</div>
+                <button onClick={()=> Accounts.logout()}>Log Out</button>
+             </div>   
         );
     }
 }

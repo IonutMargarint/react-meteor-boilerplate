@@ -1,16 +1,16 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'; 
-import App from '../../client/app';
+import { Tracker } from 'meteor/tracker';
+import { routes, onAuthChange } from '../../client/routing/routes';
+import ReactDOM from 'react-dom';
 
-const ClientApp = () => {
-  return(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-}
+Tracker.autorun(() => {
+    
+  const isAuthenticated = !!Meteor.userId();
+  onAuthChange(isAuthenticated);
+
+});  
+
 Meteor.startup(() => {
   // code to run on server at startup
-  render(<ClientApp />, document.getElementById('root'));
+  ReactDOM.render(React.createElement (routes), document.getElementById('root'));
 });

@@ -1,0 +1,16 @@
+@import '../_helpers/variables';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 62.5%;
+    //convert default 16 px to 10px
+}
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $base-font-size;
+}

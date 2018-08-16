@@ -18,5 +18,26 @@
     "simpl-schema": "^1.5.3",
     "uniforms": "^1.25.0",
     "uniforms-unstyled": "^1.25.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.1.1",
+    "css-mqpacker": "^7.0.0",
+    "postcss": "^6.0.22",
+    "postcss-csso": "^3.0.0",
+    "postcss-load-config": "^1.2.0"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          ">2%",
+          "last 3 versions",
+          "Firefox ESR",
+          "not ie < 11"
+        ]
+      },
+      "css-mqpacker": {},
+      "postcss-csso": {}
+    }
   }
 }

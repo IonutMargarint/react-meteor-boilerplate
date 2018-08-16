@@ -14,3 +14,12 @@ body{
     font-family: Helvetica, Arial, sans-serif;
     font-size: $base-font-size;
 }
+
+h1{
+    font-weight: 300;
+    margin: $space;
+}
+
+ul{
+    list-style: none;
+}

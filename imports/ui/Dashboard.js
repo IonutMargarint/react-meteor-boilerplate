@@ -9,7 +9,7 @@ class Dashboard extends React.Component {
     render(){
         return(
             <div>
-                <div>This is your dashboard!</div>
+                <h1>This is your dashboard!</h1>
                 <button onClick={()=> Accounts.logout()}>Log Out</button>
              </div>   
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AutoForm, AutoField, ErrorField } from 'uniforms-unstyled';
 import { Accounts } from 'meteor/accounts-base';
 import { Redirect } from 'react-router-dom';
@@ -39,6 +40,7 @@ class Register extends React.Component {
 
       return (
         <main className="register">
+            <Link to='/'>Home</Link>
             <AutoForm schema={RegisterSchema} onSubmit={this.onSubmit}>
                 <AutoField className="register-name" name="name"/>
                 <AutoField className="register-email" name="email"/>

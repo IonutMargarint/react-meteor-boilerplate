@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../ui/Header';
 
 const App = () => (
-  <div>
+  <div className="page-content">
     <Header />
   </div>
 )

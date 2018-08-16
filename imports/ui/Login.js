@@ -2,6 +2,7 @@ import React from 'react';
 import { AutoForm, AutoField, ErrorField } from 'uniforms-unstyled';
 import SimpleSchema from 'simpl-schema';
 import { Accounts } from 'meteor/accounts-base';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class Login extends React.Component {
     render(){
         return(
         <main className="login">
+                <Link to='/'>Home</Link>
                 <AutoForm schema={LoginSchema} 
                 onSubmit={this.onSubmit}
                 >

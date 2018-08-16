@@ -1,13 +1,38 @@
 import React from 'react';
 import { AutoForm, AutoField, ErrorField } from 'uniforms-unstyled';
-import UsersSchema from './../db/users/schema';
+import SimpleSchema from 'simpl-schema';
+import { withRouter } from 'react-router-dom';
+import { Accounts } from 'meteor/accounts-base';
+import { AuthRoute } from 'react-router-auth';
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    onSubmit = (data) => {
+
+        const {email, password} = data;
+        const { history } = this.props;
+
+        Meteor.loginWithPassword(email, password, (err) => {
+            if (!err) {
+                console.log('Logged in!');
+                    history.push('/dashboard');
+            } else {
+                alert(err.reason);
+            }
+        });
+    };
+
     render(){
         return(
         <main className="login">
-                <AutoForm schema={UsersSchema}>
-                    <AutoField className="login-email" name="email"/>
+                <AutoForm schema={LoginSchema} 
+                onSubmit={this.onSubmit}
+                >
+                    <AutoField className="login-name" name="name"/>
+                    <AutoField className="login-email" name="email" type="email"/>
                     <ErrorField name="email"/>
 
                     <AutoField className="login-password" name="password" type="password"/>
@@ -21,7 +46,25 @@ class Login extends React.Component {
                     </div>    
                 </AutoForm>
         </main>
-        )
+        );
     }
 }
+
+const LoginSchema = new SimpleSchema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        regEx: SimpleSchema.RegEx.Email
+    },
+    password:{
+        type: String,
+        min: 6,
+        required: true
+    }
+}, {tracker: Tracker});
+
 export default Login;

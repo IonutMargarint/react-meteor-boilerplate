@@ -26,20 +26,22 @@ class Login extends React.Component {
 
     render(){
         return(
-        <main className="login">
-                <Link to='/'>Home</Link>
+        <main className="cc-page-content">
+                <Link to='/' className="cc-header__title">Home</Link>
                 <AutoForm schema={LoginSchema} 
                 onSubmit={this.onSubmit}
+                className="cc-page-content__autoform"
                 >
-                    <AutoField className="login-name" name="name"/>
-                    <AutoField className="login-email" name="email" type="email"/>
+                    <AutoField className="cc-page-content__autofield" name="name"/>
+                    <AutoField className="cc-page-content__autofield" name="email" type="email"/>
                     <ErrorField name="email"/>
 
-                    <AutoField className="login-password" name="password" type="password"/>
+                    <AutoField className="cc-page-content__autofield" name="password" type="password"/>
                     <ErrorField name="password"/>
-                    <div className="forgot-password"> <a href="#">Forgot my password!</a>
-                        <div className="sign-in">
-                            <button type="submit">
+                    <div className="cc-forgot-password"> 
+                        <a href="#">Forgot my password!</a>
+                        <div>
+                            <button className="cc-form__button" type="submit">
                             Sign in
                             </button>
                         </div>

@@ -1,0 +1,29 @@
+.cc-page-content{
+    margin: 0 auto;
+    max-width: $site-max-width;
+    padding: $space;
+}
+
+.cc-page-content__autoform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 6rem;
+}
+
+.cc-page-content__autofield{
+    margin: 2rem;
+}
+
+.cc-form__button{
+    border: none;
+    background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+    box-shadow: 0 5px 0 rgb(241, 240, 240);
+    margin: 5rem;
+    padding: 2rem;
+    text-transform: uppercase;
+    opacity: 1;
+     &:hover{
+        opacity: 0.75;
+    }
+  }

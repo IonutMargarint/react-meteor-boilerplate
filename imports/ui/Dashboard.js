@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
         return(
             <div>
                 <h1>This is your dashboard!</h1>
-                <button onClick={()=> Accounts.logout()}>Log Out</button>
+                <button className="cc-form__button" onClick={()=> Accounts.logout()}>Log Out</button>
              </div>   
         );
     }

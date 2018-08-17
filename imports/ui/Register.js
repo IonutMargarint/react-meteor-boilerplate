@@ -39,20 +39,23 @@ class Register extends React.Component {
         }
 
       return (
-        <main className="register">
-            <Link to='/'>Home</Link>
-            <AutoForm schema={RegisterSchema} onSubmit={this.onSubmit}>
-                <AutoField className="register-name" name="name"/>
-                <AutoField className="register-email" name="email"/>
+        <main className="cc-page-content">
+            <Link to='/' className="cc-header__title">Home</Link>
+            <AutoForm schema={RegisterSchema} 
+            onSubmit={this.onSubmit}
+            className="cc-page-content__autoform"
+            >
+                <AutoField className="cc-page-content__autofield" name="name"/>
+                <AutoField className="cc-page-content__autofield" name="email"/>
                 <ErrorField name="email"/>
 
-                <AutoField className="register-password" name="password" type="password"/>
+                <AutoField className="cc-page-content__autofield" name="password" type="password"/>
                 <ErrorField name="password"/>
-                <AutoField className="register-repassword" name="confirm_password" type="password"/>
+                <AutoField className="cc-page-content__autofield" name="confirm_password" type="password"/>
                 <ErrorField name="confirm_password"/>
 
                 <div className="sign-up">
-                    <button type="submit">
+                    <button className="cc-form__button" type="submit">
                         Sign up
                     </button>
                 </div>

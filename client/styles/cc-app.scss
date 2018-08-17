@@ -1,2 +1,5 @@
+@import './_helpers/variables';
 @import './base/general';
-@import './pages/page-content';
+@import './layout/main/page-content';
+@import './layout/header/header';
+@import './pages/login';

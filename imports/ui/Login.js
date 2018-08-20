@@ -13,7 +13,7 @@ class Login extends React.Component {
 
         const {email, password} = data;
         const { history } = this.props;
-
+        
         Meteor.loginWithPassword(email, password, (err) => {
             if (!err) {
                 console.log('Logged in!');

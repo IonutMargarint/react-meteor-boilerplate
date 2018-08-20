@@ -1,72 +1,93 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-const appRoot = document.getElementById('app-root');
-const modalRoot = document.getElementById('modal-root');
+const root = document.getElementById('root')
+const modalRoot = document.getElementById('modal-root')
 
 class Modal extends React.Component {
+  el = document.createElement('div')
+  componentDidMount() {
+    modalRoot.appendChild(this.el)
+  }
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el)
+  }
+  render() {
+    return ReactDOM.createPortal(
+      <div
+        style={{
+          position: 'absolute',
+          top: '0',
+          bottom: '0',
+          left: '0',
+          right: '0',
+          display: 'grid',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(0,0,0,0.3)',
+        }}
+        onClick={this.props.onClose}
+      >
+        <div
+          style={{
+            padding: 20,
+            background: '#fff',
+            borderRadius: '2px',
+            display: 'inline-block',
+            minHeight: '300px',
+            margin: '1rem',
+            position: 'relative',
+            minWidth: '300px',
+            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+            justifySelf: 'center',
+          }}
+        >
+          {this.props.children}
+          <hr />
+          <button onClick={this.props.onClose}>Close</button>
+        </div>
+      </div>,
+      this.el,
+    )
+  }
+}
 
-    constructor(props){
-        super(props);
-        this.el = document.createElement('div');
-    }  
-
-    componentDidMount() {
-        modalRoot.appendChild(this.el);
-      }
-    
-      componentWillUnmount() {
-        modalRoot.removeChild(this.el);
-      }
-
-      render() {
-        return ReactDOM.createPortal(
-          
-        );
-      }
-    }
-
-
-    export default class AddTrip extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {showModal: false};
-          
-          this.handleShow = this.handleShow.bind(this);
-          this.handleHide = this.handleHide.bind(this);
-        }
-      
-        handleShow() {
-          this.setState({showModal: true});
-        }
-        
-        handleHide() {
-          this.setState({showModal: false});
-        }
-      
-        render() {
-          const modal = this.state.showModal ? (
-            <Modal>
-              <div className="modal">
-                <div>
-
-                </div>
-                This is being rendered inside the #modal-container div.
-                <button onClick={this.handleHide}>Hide modal</button>
-              </div>
+export default class AddTrip extends React.Component {
+  state = {showModal: false}
+  handleShowMessageClick = () => this.setState({showModal: true})
+  handleCloseModal = () => this.setState({showModal: false})
+  render() {
+    return (
+      <div
+        style={{
+          height: '100%',
+          display: 'grid',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 400,
+            position: 'relative',
+          }}
+        >
+          <h1>My App</h1>
+          <p>
+            This is an example.
+          </p>
+          <button onClick={this.handleShowMessageClick}>
+            Show Secret Modal
+          </button>
+          {this.state.showModal ? (
+            <Modal onClose={this.handleCloseModal}>
+              This is the secret modal message!
             </Modal>
-          ) : null;
-      
-          return (
-            <div className="app">
-              This div has overflow: hidden.
-              <button onClick={this.handleShow}>Show modal</button>
-              {modal}
-            </div>
-            
-          );
-        }
-      }
+          ) : null}
+        </div>
+      </div>
+    )
+  }
+}
 
-ReactDOM.render(<AddTrip />, appRoot);
+ReactDOM.render(<AddTrip />, root);

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Accounts } from 'meteor/accounts-base';
 import AddTrip from './AddTrip';
+import TripsList from './TripsList';
 
 class Dashboard extends React.Component {
 
@@ -17,6 +18,9 @@ class Dashboard extends React.Component {
                 <div>
                     <button className="cc-form__button" onClick={()=> Accounts.logout()}>Log Out</button>
                 </div>
+
+                <TripsList trips={this.props.trips}/>
+                
             </div>  
              
         );

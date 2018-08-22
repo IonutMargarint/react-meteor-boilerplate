@@ -17,26 +17,25 @@ export default class AddTrip extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  handleOpenModal () {
-    this.setState({ showModal: true });
-  }
-  
-  handleCloseModal () {
-    this.setState({ showModal: false });
-  }
-  
- 
-
   onSubmit(data){
     
     Meteor.call('trips.insert', data, (err, res) => {
       if (!err){
-          handleCloseModal();
-      }else {
+        console.log('Trip added'); 
+       
+      } else {
           console.log(err.reason);
-      }
+      }  
   });
-    
+  
+}
+
+handleOpenModal () {
+  this.setState({ showModal: true });
+}
+
+handleCloseModal () {
+  this.setState({ showModal: false });
 }
 
   render() {
@@ -48,8 +47,7 @@ export default class AddTrip extends React.Component {
           <p>Here you can add a new trip.</p>
           <button onClick={this.handleOpenModal}>
             Add New Trip
-          </button>
-          
+          </button>      
           {this.state.showModal ? (
             <Modal onClose={this.handleCloseModal}
             >
@@ -80,7 +78,7 @@ export default class AddTrip extends React.Component {
                         <button>+ Add Trip
                         </button>
                    </div>
-
+                   <button onClick={this.handleCloseModal}>Close</button>  
                </AutoForm>
             </Modal>
           ) : null}

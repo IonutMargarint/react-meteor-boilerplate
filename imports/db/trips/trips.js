@@ -1,25 +1,8 @@
-import AddTripSchema from '../../ui/AddTrip';
+import TripsSchema from '../../db/trips/schema';
 import { Mongo } from 'meteor/mongo';
-import SimpleSchema from 'simpl-schema';
 
-export const Trips = new Mongo.Collection('trips');
-Trips.attachSchema(AddTripSchema);
+const Trips = new Mongo.Collection('trips');
+Trips.attachSchema(TripsSchema);
 
-if(Meteor.isServer){
-    Meteor.publish('trips', function (){
-        return Trips.find({userId: this.userId});
-    });
-}
+export default Trips;
 
-Meteor.methods({
-    'trips.insert'(name){
-        if(!this.userId){
-            throw new Meteor.Error('not-authorized');
-        }
-
-        Trips.insert({
-           name
-        });
-    }
-    
-});

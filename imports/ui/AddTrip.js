@@ -1,28 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AutoForm, AutoField, ErrorField } from 'uniforms-unstyled';
-import SimpleSchema from 'simpl-schema';
-import { withTracker } from 'meteor/react-meteor-data';
-import Trips from './../db/trips/trips';
+
+import TripsSchema from './../db/trips/schema';
 import Modal from './Modal';
 
+
 export default class AddTrip extends React.Component {
- 
-  state = {
-    showModal: false
+  constructor(props){
+    super(props);
+    this.state = {
+      showModal: false
+    }
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
-  handleShowMessageClick = () => this.setState({showModal: true})
-  handleCloseModal = () => this.setState({showModal: false})
+
+  handleOpenModal () {
+    this.setState({ showModal: true });
+  }
+  
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+  
+ 
 
   onSubmit(data){
     
-    const name = data.name;
-    const price = data.price;
-    const message = data.message;
-
-    Meteor.call('trips.insert', name, (err, res) => {
+    Meteor.call('trips.insert', data, (err, res) => {
       if (!err){
-          this.handleCloseModal();
+          handleCloseModal();
       }else {
           console.log(err.reason);
       }
@@ -37,7 +46,7 @@ export default class AddTrip extends React.Component {
         <div className="cc-page-content__autoform">
           <h1>Add, Edit or Delete Your Trip</h1>
           <p>Here you can add a new trip.</p>
-          <button onClick={this.handleShowMessageClick}>
+          <button onClick={this.handleOpenModal}>
             Add New Trip
           </button>
           
@@ -47,7 +56,7 @@ export default class AddTrip extends React.Component {
               This is the secret modal message!
 
                  <AutoForm 
-                    schema={AddTripSchema} 
+                    schema={TripsSchema} 
                     onSubmit={this.onSubmit}
                     // className="cc-page-content__autoform"
                 >
@@ -81,20 +90,4 @@ export default class AddTrip extends React.Component {
   }
 }
 
-const AddTripSchema = new SimpleSchema({
-  name: {
-      type: String,
-      label: "Title",
-      required: true
-  },
-  price: {
-      type: Number,
-      label: "Budget",
-      required: true
-  },
-  message:{
-      type: String,
-      label: "Other details"
-  }
-}, {tracker: Tracker});
 

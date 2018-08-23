@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AutoForm, AutoField, ErrorField } from 'uniforms-unstyled';
-
 import TripsSchema from './../db/trips/schema';
 import Modal from './Modal';
+import TripsList from './TripsList';
 
 
 export default class AddTrip extends React.Component {
   constructor(props){
     super(props);
+    this.formRef = null;
+
     this.state = {
       showModal: false
     }
@@ -16,33 +18,27 @@ export default class AddTrip extends React.Component {
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
-
-  onSubmit(data){
-    
-    Meteor.call('trips.insert', data, (err, res) => {
-      if (!err){
-        console.log('Trip added'); 
-       
-      } else {
-          console.log(err.reason);
-      }  
-  });
   
-}
+  onSubmit = (data) => {
+    const { submit } = this.props;
+    console.log(data);
+    submit(data);
+    this.formRef.reset();
+  };
 
-handleOpenModal () {
-  this.setState({ showModal: true });
-}
-
-handleCloseModal () {
-  this.setState({ showModal: false });
-}
-
+  handleOpenModal () {
+    this.setState({ showModal: true });
+  }
+  
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+  
   render() {
-  
-    return (
+    
       
-        <div className="cc-page-content__autoform">
+    return (
+      <div className="cc-page-content__autoform">
           <h1>Add, Edit or Delete Your Trip</h1>
           <p>Here you can add a new trip.</p>
           <button onClick={this.handleOpenModal}>
@@ -54,11 +50,12 @@ handleCloseModal () {
               This is the secret modal message!
 
                  <AutoForm 
+                    ref={ref => this.formRef = ref}
+                    model={this.state.model}
                     schema={TripsSchema} 
                     onSubmit={this.onSubmit}
                     // className="cc-page-content__autoform"
                 >
-                   
                    <div>    
                        <AutoField name="name"/>
                        <ErrorField name="name"/>

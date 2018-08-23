@@ -1,32 +1,33 @@
 import React from 'react';
-import trips from './Trip';
+import { Tracker } from 'meteor/tracker';
+import trips from './../db/trips/trips';
+import Trip from './../ui/Trip';
 
 export default class TripsList extends React.Component{
-        renderTrips(){
-        
-            if(trips){
-                return (
-                    <div className="test">
-                        <p className="">Add your first trip to get started!</p>
-                    </div>
-                );
-            } else {
-            // return this.props.trips.map((trip) => {
-            //  return <Trip key={trip._id} trip={trip}/>;
-            console.log('test');
-            // });
-            }
+        constructor(props){
+            super(props);
+            
         }
         
+
         render(){
-            return (
-                    <div>
-                        
-                            {this.renderTrips()}
-                        
-                        <p>Test</p>
-                    </div>  
-                );
+            return(
+                <div>
+                    {this.props.list.map((val, index)=>{
+                            return(
+                                <Trip
+                                key={val._id}
+                                id={val._id}
+                                name={val.name}
+                                price={val.price}
+                                message={val.message}
+                            />
+                            
+                        );
+                    }) }
+                    <button>Test from tripslist</button>
+                </div>
+            );     
         }
     }; 
     

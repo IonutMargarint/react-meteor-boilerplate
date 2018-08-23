@@ -1,16 +1,28 @@
 import React from 'react';
-import Trips from './../db/trips/trips';
+import trips from './../db/trips/trips';
 
 export default class Trip extends React.Component{
-    render (){ 
-        return (
-            <div key={this.props.trip._id} className={test}>
-                <div className="test">
-                   <p>test</p>
-                </div>
-            </div>
-        );
-        
-        
-    }
-};
+
+  constructor(props){
+    super(props);
+  }
+
+    deleteTrip(){
+        var id = this.props.id
+        trips.remove({_id: id})
+       }
+
+        render(){
+               
+          const { id, name, price, message } = this.props;
+          console.log(name, id);               
+               return (
+                   <div className="test">
+                     <p>{id} {name}</p>
+                     
+                     <button onClick={this.deleteTrip.bind(this)}>X</button>
+                     <button>Test from trip</button>
+                   </div>
+                 )
+                }
+               };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Tracker } from 'meteor/tracker';
 import trips from './../db/trips/trips';
 import Trip from './../ui/Trip';
 
@@ -8,8 +7,6 @@ export default class TripsList extends React.Component{
             super(props);
             
         }
-        
-
         render(){
             return(
                 <div>
@@ -25,7 +22,6 @@ export default class TripsList extends React.Component{
                             
                         );
                     }) }
-                    <button>Test from tripslist</button>
                 </div>
             );     
         }

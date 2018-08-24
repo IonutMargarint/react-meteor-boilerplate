@@ -1,11 +1,20 @@
 .cc-modal{
     align-items: center;
-    background: #d3d3d3;
+    background: #E6EFFB;
     display: flex;
     flex-direction: column;
     padding: 3rem;
+    position: absolute;
+    top: 40%;
+    left: 40%;
     border-radius: 2rem;
-    min-height: 10rem;
-    min-width: 20rem;
+    height: 20rem;
+    width: 30rem;
+}
+
+.cc-add-trip__txt{
+    font-size: 2rem;
+    color: $brand-primary;
+    margin: $space;
 }
 

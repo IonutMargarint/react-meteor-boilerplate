@@ -13,5 +13,11 @@ Meteor.methods({
     'trips.getAll'(){
         return Trips.find({}).fetch()
         
+    },
+    'trips.remove'(trip){
+        if(!this.userId){
+            throw new Meteor.Error('not-authorized');
+        }
+        Trips.remove({_id: trip});
     }
 });

@@ -24,6 +24,8 @@ export default class AddTrip extends React.Component {
     console.log(data);
     submit(data);
     this.formRef.reset();
+    this.handleCloseModal();
+    window.location.reload();
   };
 
   handleOpenModal () {
@@ -40,14 +42,17 @@ export default class AddTrip extends React.Component {
     return (
       <div className="cc-page-content__autoform">
           <h1>Add, Edit or Delete Your Trip</h1>
-          <p>Here you can add a new trip.</p>
-          <button onClick={this.handleOpenModal}>
+          <p className="cc-add-trip__txt">Add your new trip!</p>
+          <button 
+          onClick={this.handleOpenModal}
+          className="cc-form__button"
+          >
             Add New Trip
           </button>      
           {this.state.showModal ? (
             <Modal onClose={this.handleCloseModal}
             >
-              This is the secret modal message!
+              Add Your New Trip!
 
                  <AutoForm 
                     ref={ref => this.formRef = ref}
